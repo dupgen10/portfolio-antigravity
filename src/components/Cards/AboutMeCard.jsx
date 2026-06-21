@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function AboutMeCard({ bio, skills }) {
   const info = [
     { label: "Role",        value: "Software Engineer\nBackend Specialist" },
-    { label: "Education",   value: "B.Tech Software Engineering\n(Final Year · Thesis)" },
+    { label: "Education",   value: "B.Tech Software Engineering\n(Recent Graduate)" },
     { label: "Expertise",   value: "Java · Spring Boot\nMicroservices · React" },
     { label: "Location",    value: "New Delhi ↔ Bagdogra\nIndia" },
     { label: "Interests",   value: "Basketball · Hiking\nTravel · Open Source" },

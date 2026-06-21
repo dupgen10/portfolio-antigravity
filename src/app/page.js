@@ -25,16 +25,10 @@ export default function Home() {
           className="w-full px-8 md:px-16 py-8"
           style={{ borderTop: "1px solid var(--border)" }}
         >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-3">
             <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--muted)" }}>
               © 2026 Dupgen Sherpa — Built with Next.js
             </p>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "var(--lime)", boxShadow: "0 0 6px var(--lime)" }} />
-              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--muted)" }}>
-                Available for hire
-              </span>
-            </div>
           </div>
         </footer>
       </main>

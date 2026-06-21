@@ -14,17 +14,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-0">
       {/* ── Top row: badge + location ── */}
-      <div className="w-full px-8 md:px-16 flex items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="badge">
-            <span className="badge-dot" />
-            Open to work
-          </span>
-        </motion.div>
+      <div className="w-full px-8 md:px-16 flex items-center justify-end">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -68,9 +58,9 @@ export default function Hero() {
             <p className="body-text">
               Software engineer building{" "}
               <span style={{ color: "var(--ivory)" }}>high-performance microservices</span>{" "}
-              with Java & Spring Boot. Currently completing a{" "}
-              <span style={{ color: "var(--lime)" }}>Bachelor Thesis</span>{" "}
-              in Software Engineering.
+              with Java & Spring Boot. A recent{" "}
+              <span style={{ color: "var(--lime)" }}>B.Tech graduate</span>{" "}
+              ready to make an impact.
             </p>
           </div>
 

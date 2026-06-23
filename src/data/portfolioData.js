@@ -4,7 +4,9 @@ export const portfolioData = {
     title: "Software Engineer & UX Architect",
     subtitle: "Bridging the gap between robust backend systems and beautiful, intuitive interfaces.",
   },
+  about: {
     bio: "I'm a recent B.Tech Software Engineering graduate and fresh to the corporate world, eager to make an impact. My expertise lies in building scalable backends with Java and Spring Boot, paired with modern React frontends. When I'm not coding, you'll find me shooting hoops on local outdoor basketball courts or traveling between New Delhi and the Bagdogra region.",
+    skills: ["Java", "Spring Boot", "React", "Next.js", "Tailwind CSS", "Microservices"]
   },
   projects: [
     {

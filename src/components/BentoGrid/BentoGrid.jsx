@@ -5,6 +5,7 @@ import { portfolioData } from "../../data/portfolioData";
 import ProjectCard from "../Cards/ProjectCard";
 import AboutMeCard from "../Cards/AboutMeCard";
 import GitHubStats from "../GitHubStats/GitHubStats";
+import SpotifyNowPlaying from "../SpotifyNowPlaying/SpotifyNowPlaying";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -108,6 +109,11 @@ export default function BentoGrid() {
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* Spotify Now Playing */}
+            <div className="mt-8">
+              <SpotifyNowPlaying />
             </div>
           </motion.div>
 

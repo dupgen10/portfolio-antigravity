@@ -1,73 +1,41 @@
 #!/usr/bin/env node
 
 /**
- * Spotify Refresh Token Generator
+ * Spotify Refresh Token Generator (Manual Flow)
  * 
- * Run this script ONCE to get your refresh token:
- *   node scripts/get-spotify-token.mjs
- * 
- * Prerequisites:
- *   1. Go to https://developer.spotify.com/dashboard
- *   2. Create a new app
- *   3. Set the Redirect URI to: http://localhost:3333/callback
- *   4. Copy your Client ID and Client Secret
- *   5. Run this script and paste them when prompted
+ * Run: node scripts/get-spotify-token.mjs
  */
 
-import http from "node:http";
-import { URL } from "node:url";
 import readline from "node:readline/promises";
 
-const REDIRECT_URI = "http://localhost:3333/callback";
 const SCOPES = "user-read-currently-playing user-read-recently-played";
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 async function main() {
   console.log("\n🎵 Spotify Refresh Token Generator\n");
-  console.log("Before starting, make sure you've created a Spotify app at:");
-  console.log("  https://developer.spotify.com/dashboard\n");
-  console.log(`Set the Redirect URI to: ${REDIRECT_URI}\n`);
 
-  const clientId = await rl.question("Paste your Client ID: ");
-  const clientSecret = await rl.question("Paste your Client Secret: ");
+  const clientId = (await rl.question("Paste your Client ID: ")).trim();
+  const clientSecret = (await rl.question("Paste your Client Secret: ")).trim();
+  const redirectUri = (await rl.question("Paste the Redirect URI you registered in Spotify (e.g. https://google.com): ")).trim();
 
   const authUrl =
     `https://accounts.spotify.com/authorize?` +
-    `client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+    `client_id=${clientId}` +
+    `&response_type=code` +
+    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
     `&scope=${encodeURIComponent(SCOPES)}`;
 
-  console.log("\n🔗 Open this URL in your browser:\n");
+  console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("🔗 Open this URL in your browser:\n");
   console.log(authUrl);
-  console.log("\nWaiting for callback...\n");
+  console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("\nAfter you authorize, Spotify will redirect you.");
+  console.log("Look at the URL bar — it will look something like:");
+  console.log("  https://google.com/?code=AQDx7s...very_long_string\n");
+  console.log("Copy EVERYTHING after '?code=' (the long string)\n");
 
-  // Start a temporary local server to catch the callback
-  const code = await new Promise((resolve, reject) => {
-    const server = http.createServer((req, res) => {
-      const url = new URL(req.url, `http://localhost:3333`);
-      const authCode = url.searchParams.get("code");
-      const error = url.searchParams.get("error");
-
-      if (error) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end("<h1>❌ Authorization denied.</h1><p>You can close this tab.</p>");
-        server.close();
-        reject(new Error(error));
-        return;
-      }
-
-      if (authCode) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end("<h1>✅ Got it!</h1><p>Go back to the terminal.</p>");
-        server.close();
-        resolve(authCode);
-      }
-    });
-
-    server.listen(3333, () => {
-      console.log("🖥  Local server listening on http://localhost:3333 ...");
-    });
-  });
+  const code = (await rl.question("Paste the code here: ")).trim();
 
   // Exchange code for tokens
   const basic = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
@@ -80,7 +48,7 @@ async function main() {
     body: new URLSearchParams({
       grant_type: "authorization_code",
       code,
-      redirect_uri: REDIRECT_URI,
+      redirect_uri: redirectUri,
     }),
   });
 
@@ -97,7 +65,7 @@ async function main() {
   console.log(`SPOTIFY_CLIENT_SECRET=${clientSecret}`);
   console.log(`SPOTIFY_REFRESH_TOKEN=${tokenData.refresh_token}`);
   console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-  console.log("\nAlso add these as Environment Variables in your Vercel dashboard:");
+  console.log("\nAlso add these as Environment Variables in Vercel:");
   console.log("  Settings → Environment Variables → Add each one\n");
 
   rl.close();

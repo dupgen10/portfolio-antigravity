@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";
+import SpotifyNowPlaying from "../SpotifyNowPlaying/SpotifyNowPlaying";
 
 const SKILLS = ["Java 21", "Spring Boot", "Microservices", "REST APIs", "React 18",
   "Next.js", "Tailwind CSS", "PostgreSQL", "MongoDB", "Docker", "Kafka", "Git"];
@@ -13,7 +14,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-0">
-      {/* ── Top row: badge + location ── */}
+      {/* ── Top row: location ── */}
       <div className="w-full px-8 md:px-16 flex items-center justify-end">
         <motion.p
           initial={{ opacity: 0 }}
@@ -26,24 +27,38 @@ export default function Hero() {
         </motion.p>
       </div>
 
-      {/* ── HERO HEADLINE — full width editorial ── */}
-      <div className="w-full px-8 md:px-16 mt-12 md:mt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Name — MASSIVE */}
-          <h1 className="display-xl text-white overflow-hidden">
-            <span className="block">DUPGEN</span>
-            <span
-              className="block"
-              style={{ WebkitTextStroke: "2px var(--ivory)", color: "transparent" }}
-            >
-              SHERPA
-            </span>
-          </h1>
-        </motion.div>
+      {/* ── HERO HEADLINE — name + spotify on right ── */}
+      <div className="w-full px-8 md:px-16 mt-12 md:mt-16 relative">
+        <div className="flex items-center justify-between gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-shrink-0"
+          >
+            {/* Name — MASSIVE */}
+            <h1 className="display-xl text-white overflow-hidden">
+              <span className="block">DUPGEN</span>
+              <span
+                className="block"
+                style={{ WebkitTextStroke: "2px var(--ivory)", color: "transparent" }}
+              >
+                SHERPA
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Spotify widget — right side, hidden on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden md:block flex-shrink-0"
+            style={{ maxWidth: "260px", width: "100%" }}
+          >
+            <SpotifyNowPlaying />
+          </motion.div>
+        </div>
 
         {/* ── Sub row below name ── */}
         <motion.div

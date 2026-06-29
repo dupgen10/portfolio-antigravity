@@ -92,7 +92,7 @@ export default function BentoGrid() {
               {[
                 { num: "3+", label: "Years building\nbackend systems" },
                 { num: "4", label: "Projects shipped\n(and counting)" },
-                { num: "∞", label: "Outdoor basketball\ncourt sessions" },
+                { num: "∞", label: "Outdoor football\nturf sessions" },
               ].map(({ num, label }) => (
                 <div key={num} className="flex items-baseline gap-5">
                   <span
@@ -139,8 +139,8 @@ export default function BentoGrid() {
           </div>
           <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-x-16 gap-y-0">
             {[
-              { cat: "Backend",      items: ["Java 21", "Spring Boot 3", "Spring MVC", "Microservices", "REST APIs", "Kafka"] },
-              { cat: "Frontend",     items: ["React 18", "Next.js 15", "Tailwind CSS", "Framer Motion"] },
+              { cat: "Backend", items: ["Java 21", "Spring Boot 3", "Spring MVC", "Microservices", "REST APIs", "Kafka"] },
+              { cat: "Frontend", items: ["React 18", "Next.js 15", "Tailwind CSS", "Framer Motion"] },
               { cat: "Data & Infra", items: ["PostgreSQL", "MongoDB", "Docker", "Git & GitHub"] },
             ].map(({ cat, items }) => (
               <div key={cat}>

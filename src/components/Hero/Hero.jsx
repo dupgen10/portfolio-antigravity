@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";
 import SpotifyNowPlaying from "../SpotifyNowPlaying/SpotifyNowPlaying";
+import BaseCampWidget from "../BaseCampWidget/BaseCampWidget";
 
 const SKILLS = ["Java 21", "Spring Boot", "Microservices", "REST APIs", "React 18",
   "Next.js", "Tailwind CSS", "PostgreSQL", "MongoDB", "Docker", "Kafka", "Git"];
@@ -37,7 +38,7 @@ export default function Hero() {
             className="flex-shrink-0"
           >
             {/* Name — MASSIVE */}
-            <h1 className="display-xl text-white overflow-hidden">
+            <h1 className="display-xl-hero text-white overflow-hidden">
               <span className="block">DUPGEN</span>
               <span
                 className="block"
@@ -48,7 +49,7 @@ export default function Hero() {
             </h1>
           </motion.div>
 
-          {/* Spotify widget — right side, hidden on mobile */}
+          {/* Spotify + BaseCamp widgets — right side */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -57,6 +58,7 @@ export default function Hero() {
             style={{ maxWidth: "260px", width: "100%" }}
           >
             <SpotifyNowPlaying />
+            <BaseCampWidget />
           </motion.div>
         </div>
 
@@ -117,6 +119,12 @@ export default function Hero() {
           </div>
         </div>
       </motion.div>
+
+      {/* Mobile-only interactive stack (renders below the hero on <1024px) */}
+      <div className="md:hidden w-full px-8 mt-12 mb-8 flex flex-col gap-6">
+        <SpotifyNowPlaying />
+        <BaseCampWidget />
+      </div>
     </section>
   );
 }
